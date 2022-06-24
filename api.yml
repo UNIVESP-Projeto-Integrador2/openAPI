@@ -203,11 +203,10 @@ paths:
                   maxLength: 5
                   pattern: ^[0-2][0-3]:[0-5][0-9]$ # 00:00 a 23:59
                 status:
-                  description: porcentagem que aumenta conforme as subtarefas são finalizadas
-                  type: integer
-                  format: int32
-                  minimum: 0
-                  maximum: 100   
+                  type: string
+                  enum: [A_FAZER, FAZENDO, FEITO]
+                  minLength: 5
+                  maxLength: 7
                 descricao:
                   description: descrição da atividade
                   type: string
