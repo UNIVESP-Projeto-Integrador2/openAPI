@@ -253,6 +253,53 @@ paths:
           description: a requisição enviada possui algum item de tipagem diferente ou faltante
         '500':
           description: erro no servidor
+  /subtarefas:
+    post:
+      summary: Insere uma nova subtarefa na plataforma, vinculada à uma tarefa via id_tarefa
+      description: Inserção de uma nova subtarefa
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                id_tarefa:
+                  description: id da atividade
+                  type: integer
+                  format: int64 
+                  minimum: 1
+                nome_subtarefa: 
+                  description: nome da subtarefa
+                  type: string
+                  minLength: 0
+                  maxLength: 200
+                anexo_subtarefa:
+                  description: arquivo que o usuário quiser anexar
+                  type: string 
+                  format: url
+                  minLength: 0 # caso não houver anexo, deixar vazio
+                status_subtarefa:
+                  description: status da subtarefa, vem como A_FAZER por default
+                  enum: [A_FAZER, FAZENDO, FEITO]
+                  type: string
+                  minLength: 5
+                  maxLength: 7
+              required:
+                - id_tarefa
+                - nome_subtarefa
+      responses:
+        '201':    # status code
+          description: a atividade foi criada
+          content:
+            application/json:
+              schema: 
+                type: string
+        '400':
+          description: a requisição enviada possui algum item de tipagem diferente ou faltante
+        '500':
+          description: erro no servidor
+  
   /subtarefas/{id_subtarefa}: 
     put:
       summary: realiza a edição de uma subtarefa
